@@ -11,7 +11,6 @@ from restaurant_review.models import Restaurant, Review, Home
 
 def index(request):
     print('Request for index page received')
-	
     restaurants = Restaurant.objects.annotate(avg_rating=Avg('review__rating')).annotate(review_count=Count('review'))
     return render(request, 'restaurant_review/index.html', {'restaurants': restaurants})
 
