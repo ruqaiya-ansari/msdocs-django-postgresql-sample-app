@@ -11,7 +11,9 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 
-
+class Home(models.Model):
+    photo = models.ImageField(upload_to="image")
+	
 class Review(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     user_name = models.CharField(max_length=20)

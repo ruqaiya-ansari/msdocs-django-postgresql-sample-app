@@ -5,14 +5,15 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
-from restaurant_review.models import Restaurant, Review
+from restaurant_review.models import Restaurant, Review, Home
 
 # Create your views here.
 
 def index(request):
     print('Request for index page received')
+	list = Home.objects.all()
     restaurants = Restaurant.objects.annotate(avg_rating=Avg('review__rating')).annotate(review_count=Count('review'))
-    return render(request, 'restaurant_review/index.html', {'restaurants': restaurants})
+    return render(request, 'restaurant_review/index.html', {'restaurants': restaurants, 'list': list})
 
 
 def details(request, id):
